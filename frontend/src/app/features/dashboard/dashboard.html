@@ -1,0 +1,36 @@
+<div class="max-w-md space-y-4">
+  <h1 class="text-xl font-semibold">Dashboard</h1>
+  <p class="text-sm text-slate-600">
+    This list is a sample plain-service + EF Core vertical slice — copy the pattern
+    for your real features and delete this once you don't need it.
+  </p>
+  <form (ngSubmit)="addItem()" class="flex gap-2">
+    <input
+      [(ngModel)]="title"
+      name="title"
+      placeholder="New item..."
+      class="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm"
+    />
+    <button class="rounded-md bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800">
+      Add
+    </button>
+  </form>
+  @if (error()) {
+    <p class="text-sm text-red-600">{{ error() }}</p>
+  }
+  <ul class="divide-y divide-slate-200 rounded-md border border-slate-200 bg-white">
+    @for (item of items(); track item.id) {
+      <li class="flex items-center gap-3 px-3 py-2">
+        <input type="checkbox" [checked]="item.isDone" (change)="toggleDone(item)" />
+        <span class="flex-1 text-sm" [class.text-slate-400]="item.isDone" [class.line-through]="item.isDone">
+          {{ item.title }}
+        </span>
+        <button (click)="remove(item.id)" class="text-xs text-slate-400 hover:text-red-600">
+          Remove
+        </button>
+      </li>
+    } @empty {
+      <li class="px-3 py-4 text-sm text-slate-400">No items yet.</li>
+    }
+  </ul>
+</div>

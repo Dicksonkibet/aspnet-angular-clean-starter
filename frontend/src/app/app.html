@@ -1,0 +1,27 @@
+<div class="min-h-screen bg-slate-50 text-slate-900">
+  <header class="border-b border-slate-200 bg-white">
+    <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
+      <a routerLink="/" class="font-semibold tracking-tight">CleanStart</a>
+      <nav class="flex items-center gap-4 text-sm">
+        @if (auth.isAuthenticated()) {
+          <a routerLink="/dashboard" class="hover:underline">Dashboard</a>
+          <span class="text-slate-500">{{ auth.user()?.fullName }}</span>
+          <button (click)="auth.logout()" class="text-slate-500 hover:text-slate-900">
+            Log out
+          </button>
+        } @else {
+          <a routerLink="/login" class="hover:underline">Log in</a>
+          <a
+            routerLink="/register"
+            class="rounded-md bg-slate-900 px-3 py-1.5 text-white hover:bg-slate-800"
+          >
+            Sign up
+          </a>
+        }
+      </nav>
+    </div>
+  </header>
+  <main class="mx-auto max-w-4xl px-4 py-8">
+    <router-outlet />
+  </main>
+</div>

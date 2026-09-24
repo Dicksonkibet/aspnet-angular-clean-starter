@@ -1,0 +1,30 @@
+<div class="mx-auto max-w-sm space-y-4">
+  <h1 class="text-xl font-semibold">Log in</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-3">
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Email"
+      class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+    />
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Password"
+      class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+    />
+    @if (error()) {
+      <p class="text-sm text-red-600">{{ error() }}</p>
+    }
+    <button
+      type="submit"
+      [disabled]="loading()"
+      class="w-full rounded-md bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-50"
+    >
+      {{ loading() ? 'Logging in...' : 'Log in' }}
+    </button>
+  </form>
+  <p class="text-sm text-slate-600">
+    No account? <a routerLink="/register" class="underline">Sign up</a>
+  </p>
+</div>
